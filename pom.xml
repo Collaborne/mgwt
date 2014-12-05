@@ -11,7 +11,7 @@
 
   <groupId>com.googlecode.mgwt</groupId>
   <artifactId>mgwt</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.0-collaborne-1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>mgwt</name>
 
@@ -43,12 +43,27 @@
   </contributors>
 
   <scm>
-    <url>https://code.google.com/p/mgwt/</url>
-    <connection>scm:git:git@github.com:mgwt/mgwt.git</connection>
-    <developerConnection>scm:git:git@github.com:mgwt/mgwt.git</developerConnection>
+    <connection>scm:git:git@github.com:Collaborne/mgwt.git</connection>
+    <developerConnection>scm:git:git@github.com:Collaborne/mgwt.git</developerConnection>
   </scm>
 
+  <distributionManagement>
+    <repository>
+      <id>collaborne-thirdparty-repository</id>
+      <url>s3://collaborne-repository/maven/thirdparty</url>
+      <layout>default</layout>
+    </repository>
+  </distributionManagement>
+
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.kuali.maven.wagons</groupId>
+        <artifactId>maven-s3-wagon</artifactId>
+        <version>1.2.1</version>
+      </extension>
+    </extensions>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -145,6 +160,15 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <arguments>${release.arguments}</arguments>
+        </configuration>
       </plugin>
   
     </plugins>
